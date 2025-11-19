@@ -1,0 +1,52 @@
+{
+  "version": "1.0.0",
+  "build": "2025-11-19",
+  "codename": "Argus",
+  "author": "HubSev",
+  "organization": "HubMyWeb Cyberlab",
+  "website": "https://hubmyweb.com",
+  "support_contact": "support@hubmyweb.com",
+
+  "environment": {
+    "python_min": "3.11",
+    "python_max": "3.12",
+    "os_supported": ["Windows 10", "Windows 11", "Server 2019", "Server 2022"],
+    "architecture": "x86_64"
+  },
+
+  "description": "Suite forensic EML/IMAP professionnelle en lecture seule, permettant :\n- l’export IMAP non destructif (lecture seule)\n- la génération d’un index CSV complet\n- l’analyse détaillée des messages EML (headers + bodies)\n- la consultation du hash global et des preuves associées",
+
+  "features": [
+    "Export IMAP en lecture seule (RFC822 + INTERNALDATE + hashing)",
+    "Hash SHA-256 individuel + hash global concaténé",
+    "Indexation CSV complète pour analyses forensic",
+    "Viewer EML : headers bruts, corps texte, corps HTML",
+    "Recherche avancée dans l’index",
+    "Architecture multi-thread (séparation UI / workers)",
+    "Compatibilité PyInstaller onefile",
+    "Rapport forensic horodaté (UTC + local)"
+  ],
+
+  "changelog": [
+    "Initialisation du projet forensic",
+    "Séparation totale des modules : common_utils, imap_exporter, indexer, viewer, main_app",
+    "Refactor complet : threading propre, queues UI, zero freeze",
+    "Ajout du support VERSION.json",
+    "Ajout de resource_path pour compatibilité PyInstaller",
+    "Design de l’interface unifiée (3 onglets)",
+    "Icône personnalisée + versioning interne",
+    "Ajout du hash du rapport dans hashes.txt"
+  ],
+
+  "legal": {
+    "license": "Usage interne / Projet personnel — Non destiné à un usage commercial sans autorisation.",
+    "disclaimer": "Cet outil forensic fonctionne exclusivement en lecture seule. Aucun message, drapeau IMAP ou contenu serveur n'est modifié, supprimé ou marqué comme lu.",
+    "confidentiality": "Les données analysées demeurent la propriété exclusive de l'organisation cliente."
+  },
+
+  "internal_notes": [
+    "Préparer la v1.1.0 avec extraction sélective par UID list.",
+    "Prévoir future fonctionnalité : génération automatique du timeline report.",
+    "Prévoir un mode CLI silencieux pour automatisation."
+  ]
+}
