@@ -67,8 +67,9 @@ et utilisé dans des cas réels de compromission de boîtes mail.
 ## 📦 Installation (sources)
 
 ```sh
-git clone https://github.com/HubSev/eml-forensic-suite.git
+git clone https://github.com/HubSev/eml_forensic_suite.git
 cd eml-forensic-suite
 pip install -r requirements.txt
 python main_app.py
 ```
+
