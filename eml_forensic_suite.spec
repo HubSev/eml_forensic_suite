@@ -1,23 +1,16 @@
 # -*- mode: python ; coding: utf-8 -*-
 
-# Si tu veux, tu peux ajouter ici un block_cipher plus tard
-# block_cipher = None
-
 a = Analysis(
-    ['main_app.py'],
-    pathex=['.'],
+    ['src/eml_forensic_suite/__main__.py'],
+    pathex=['src'],
     binaries=[],
     datas=[
-        ('icone.ico', '.'),      # pour la fenêtre Tkinter
-        ('VERSION.txt', '.'),    # fichier de version embarqué
+        ('src/eml_forensic_suite/icone.ico', 'eml_forensic_suite'),
+        ('src/eml_forensic_suite/core/version.json', 'eml_forensic_suite/core'),
+        ('src/eml_forensic_suite/ui/traductions/*.py', 'eml_forensic_suite/ui/traductions'),
     ],
-    hiddenimports=[],
-    hookspath=[],
-    hooksconfig={},
-    runtime_hooks=[],
-    excludes=[],
+    hiddenimports=['dkim'],
     noarchive=False,
-    optimize=0,
 )
 
 pyz = PYZ(a.pure)
@@ -29,18 +22,8 @@ exe = EXE(
     a.datas,
     [],
     name='eml_forensic_suite',
-    debug=False,
-    bootloader_ignore_signals=False,
-    strip=False,
-    upx=True,
-    upx_exclude=[],
-    runtime_tmpdir=None,
+    icon='src/eml_forensic_suite/icone.ico',
+    version='file_version_info.txt',
     console=False,
-    disable_windowed_traceback=False,
-    argv_emulation=False,
-    target_arch=None,
-    codesign_identity=None,
-    entitlements_file=None,
-    version='version_info.txt',
-	icon='icone.ico',
+    upx=True,
 )

@@ -1,75 +1,115 @@
-# 📂 EML / IMAP Forensic Suite
+# 📂 EML / IMAP Forensic Suite – v1.0.1
 
-### **Export IMAP (lecture seule) · Indexation CSV · Analyse d’en-têtes · Viewer brut EML**
+### **Read-only IMAP export · CSV indexing · Advanced forensic viewer · Attachment analysis · Statistical dashboard · Boolean search**
 
-[![License](https://img.shields.io/badge/License-CC--BY--NC%204.0-orange)](LICENSE)
-![Status](https://img.shields.io/badge/Status-Active-brightgreen)
-![Python](https://img.shields.io/badge/Python-3.12-blue)
+[![License](https://img.shields.io/badge/License-CC--BY--NC%204.0-orange)](LICENSE)  
+![Status](https://img.shields.io/badge/Status-Active-brightgreen)  
+![Python](https://img.shields.io/badge/Python-3.12-blue)  
 ![Platform](https://img.shields.io/badge/Platform-Windows%2010%2B-lightgrey)
 
 ---
 
-## 🔍 À propos
+## 🔍 About
 
-**EML / IMAP Forensic Suite** est une suite d’outils professionnels orientés
-**analyse forensic d’emails**, conçue pour :
+**EML / IMAP Forensic Suite** is a professional suite dedicated to  
+**forensic email analysis**, designed for investigations such as:
 
-- Exporter une boîte mail IMAP **en lecture seule**
-- Télécharger tous les messages au format `.eml` sans jamais les modifier
-- Générer les **hashes SHA-256 uniques** des messages + un **hash global**
-- Indexer tout un export `.eml` en un **fichier CSV exploitable**
-- Lire les en-têtes bruts et métadonnées **sans altération**
-- Fournir un **rapport d’audit complet** (dossiers, tailles, périodes, erreurs, hashing)
+- BEC (Business Email Compromise)
+- Financial fraud
+- Mailbox compromise
+- Legal investigations and court-appointed expert work
 
-Développé pour des **investigations BEC (Business Email Compromise)**,  
-et utilisé dans des cas réels de compromission de boîtes mail.
+The application allows you to:
+
+- perform **read-only IMAP extraction**,
+- **index an EML corpus** into a structured CSV file,
+- run **automatic forensic analysis** (headers, Received chain, DKIM/SPF/DMARC, attachments…),
+- **deeply inspect** individual emails,
+- and produce a **complete statistical summary**.
+
+All operations are non-destructive:  
+🛡 **the original EML files are never modified.**
 
 ---
 
-## 🧰 Fonctionnalités principales
+## 🧰 Main features (v1.0.1)
 
-### ✔ Export IMAP (lecture seule)
+### ✔ Read-only IMAP export
 
-- Connexion IMAP SSL
-- Pas de modification des messages (READONLY)
-- Hash SHA-256 pour chaque `.eml`
-- Hash global des messages exportés
-- Rapport forensic horodaté (UTC + local)
-- Aucune écriture sur le serveur
+- IMAP over SSL
+- Export to `.eml` without ever writing back to the server
+- IMAP folder selection
+- Date filtering
+- Per-message SHA-256 hash
+- Global export hash
+- Full forensic report: folders, sizes, periods, errors, hashing, server greeting
 
-### ✔ Indexation EML
+### ✔ EML indexing
 
-- Scan d’un dossier contenant des `.eml`
-- Extraction automatique :
+- Full analysis of a folder of `.eml` files
+- Automatic extraction of:
+
   - Date
-  - From / To / CC / BCC
+  - From / To / CC / Bcc (via CC + Bcc)
   - Subject
   - Message-ID
-  - Dossier IMAP d’origine
-- Création d’un **CSV compatible Excel et LibreOffice**
-- Correspondance automatique avec `hashes.txt`
+  - Original IMAP folder
+  - Corresponding hash (via `hashes.txt`)
+  - Forensic indicators:
+    - DKIM / SPF / DMARC (from Authentication-Results)
+    - Received chain (anomaly detection)
+    - Integrity flags (missing date, missing Message-ID, etc.)
+    - Attachments
 
-### ✔ Viewer EML
+- Generation of a **CSV index** + internal Python index
+- Multi-threaded indexing for smooth performance
 
-- Recherche par numéro de séquence
-- Consultation des en-têtes bruts
-- Visualisation sans altération du fichier
+### ✔ Advanced forensic viewer (new)
 
-### ✔ Interface graphique complète (Tkinter)
+- Full display of:
+  - Raw headers
+  - Text body + sanitized HTML
+  - Attachments (list + metadata)
+- Forensic attachment extraction:
+  - SHA-256 hash
+  - Per-attachment individual report
+- Preview of images / PDFs / simple files
+- Powerful forensic search system (mini-language):
+  - `from:`, `to:`, `cc:`, `subject:`, `domain:`, `attachment:true`, `hash:`, `folder:`, `date:`
+  - Booleans: **AND / OR / NOT**
+  - **Parentheses**: `(cond1 or cond2) and not cond3`
+  - Implicit AND
+  - Global full-text search (headers + attachments + hash)
 
-- 3 onglets : Export / Indexation / Viewer
-- Multi-threading pour éviter les blocages
-- Journal en temps réel
-- Barre de progression
+### ✔ Forensic dashboard (new)
+
+- Global statistical view of an EML corpus
+- Analysis of:
+  - Sender domains
+  - Distribution by IMAP folder
+  - Time period
+  - DKIM/SPF/DMARC
+  - Received anomalies
+  - Integrity flags
+  - Attachments
+- Clear, exportable textual summary
+
+### ✔ Modern graphical interface (PySide6)
+
+- 4 tabs: IMAP • Indexing • Viewer • Dashboard
+- Light / dark theme
+- Multi-language:
+  - French, English
+  - - Arabic, German, Spanish, Hindi, Italian, Japanese, Korean, Dutch, Portuguese, Russian, Turkish, Ukrainian, Chinese
+- Shared state management (last index, last export, etc.)
 
 ---
 
-## 📦 Installation (sources)
+## 📦 Installation (from source)
 
 ```sh
 git clone https://github.com/HubSev/eml_forensic_suite.git
-cd eml-forensic-suite
+cd eml_forensic_suite
 pip install -r requirements.txt
-python main_app.py
+python -m eml_forensic_suite
 ```
-
